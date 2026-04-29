@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hanzi Writer Single Char</title>
+    </head>
+    <body>
+        <div id="target"></div>
+        <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.2.1/dist/hanzi-writer.min.js"></script>
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const char = (params.get("char") || "龙")[0];
+
+            const writer = HanziWriter.create("target", char, {
+                width: 200,
+                height: 200,
+                showOutline: true,
+            });
+
+            const play = () =>
+                writer.animateCharacter({
+                    onComplete: () => setTimeout(play, 1500),
+                });
+            play();
+        </script>
+    </body>
+</html>
